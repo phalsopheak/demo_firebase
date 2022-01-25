@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "213279724997",
+    "project_id": "fir-firebase-5c53a",
+    "storage_bucket": "fir-firebase-5c53a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213279724997:android:72a184f67ba366a2dde7ac",
+        "android_client_info": {
+          "package_name": "dev.anatta.demofirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213279724997-fa472si8f0u5q6molv7jqppm5ri1gthn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9cTcVGDFGeqVzHbF2FVMH1vN2BIeiJyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213279724997-fa472si8f0u5q6molv7jqppm5ri1gthn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
