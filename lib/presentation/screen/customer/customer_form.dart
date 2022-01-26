@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:demo_firebase/core/constant/firebase_storage.dart';
 import 'package:demo_firebase/core/enum/transaction_enum.dart';
 import 'package:demo_firebase/data/model/customer_model.dart';
 import 'package:demo_firebase/presentation/controller/customer_controller.dart';
@@ -93,18 +94,16 @@ class _CustomerFormState extends State<CustomerForm> {
 
   saveCustomer(CustomerModel model) async {
     if (pictureFile != null) {
-      firebase_storage.TaskSnapshot snapshot = await firebase_storage
-          .FirebaseStorage.instance
-          .ref()
-          .child('customer_profile')
-          .child(model.id)
+      firebase_storage.TaskSnapshot snapshot = await FirebaseStorageReference
+          .customerProfile
+          .child(model.id + '.jpg')
           .putFile(
             pictureFile!,
             firebase_storage.SettableMetadata(contentType: 'image/jpg'),
           );
       if (snapshot.state == firebase_storage.TaskState.success) {
         final String downloadUrl = await snapshot.ref.getDownloadURL();
-        model.copyWith(profilePicture: downloadUrl);
+        model = model.copyWith(profilePicture: downloadUrl);
       } else if (snapshot.state == firebase_storage.TaskState.error) {
         Get.snackbar('Error', 'Upload profile picture problem');
         return;
@@ -112,6 +111,27 @@ class _CustomerFormState extends State<CustomerForm> {
     }
 
     customerController.saveCustomer(model);
+  }
+
+  updateCustomer(CustomerModel model) async {
+    if (pictureFile != null) {
+      firebase_storage.TaskSnapshot snapshot = await FirebaseStorageReference
+          .customerProfile
+          .child(model.id + '.jpg')
+          .putFile(
+            pictureFile!,
+            firebase_storage.SettableMetadata(contentType: 'image/jpg'),
+          );
+      if (snapshot.state == firebase_storage.TaskState.success) {
+        final String downloadUrl = await snapshot.ref.getDownloadURL();
+        model = model.copyWith(profilePicture: downloadUrl);
+      } else if (snapshot.state == firebase_storage.TaskState.error) {
+        Get.snackbar('Error', 'Upload profile picture problem');
+        return;
+      }
+    }
+
+    customerController.updateCustomer(model);
   }
 
   @override
@@ -137,7 +157,7 @@ class _CustomerFormState extends State<CustomerForm> {
                     name: tecName.text,
                     profilePicture:
                         customerController.selectedCustomer.profilePicture);
-                saveCustomer(model);
+                updateCustomer(model);
               }
             },
             icon: const Icon(Icons.save),
@@ -173,8 +193,8 @@ class _CustomerFormState extends State<CustomerForm> {
                         )
                       : ClipRRect(
                           borderRadius: BorderRadius.circular(5),
-                          child: Image.file(
-                            pictureFile!,
+                          child: Image.network(
+                            customerController.selectedCustomer.profilePicture!,
                             fit: BoxFit.fill,
                             width: 100,
                             height: 100,

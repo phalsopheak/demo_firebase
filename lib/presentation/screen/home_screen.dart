@@ -16,13 +16,13 @@ class HomeScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Get.to(() => CustomerScreen());
+                Get.to(() => const CustomerScreen());
               },
               child: const Text('Customer Demo'),
             ),
             ElevatedButton(
               onPressed: () {
-                Get.to(() => CustomerScreen());
+                Get.to(() => const CustomerScreen());
               },
               child: const Text('Product Demo'),
             ),
