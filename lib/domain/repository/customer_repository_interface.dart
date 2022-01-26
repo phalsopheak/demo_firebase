@@ -4,5 +4,7 @@ import 'package:demo_firebase/domain/util/app_error.dart';
 
 abstract class ICustomerRepository {
   Future<Either<AppError, String>> saveCustomer(CustomerModel model);
+  Future<Either<AppError, String>> updateCustomer(CustomerModel model);
+  Future<Either<AppError, String>> deleteCustomer(String recordId);
   Future<Either<AppError, List<CustomerModel>>> getListOfCustomer();
 }

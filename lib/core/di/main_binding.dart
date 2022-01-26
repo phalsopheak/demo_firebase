@@ -31,11 +31,26 @@ class MainBinding extends Bindings {
       ),
       permanent: true,
     );
-    Get.lazyPut(
-      () => CustomerController(
+    Get.put<UpdateCustomerUseCase>(
+      UpdateCustomerUseCase(
+        customerRepository: Get.find(),
+      ),
+      permanent: true,
+    );
+    Get.put<DeleteCustomerUseCase>(
+      DeleteCustomerUseCase(
+        customerRepository: Get.find(),
+      ),
+      permanent: true,
+    );
+    Get.put(
+      CustomerController(
         getListOfCustomerUseCase: Get.find(),
         saveCustomerUseCase: Get.find(),
+        updateCustomerUseCase: Get.find(),
+        deleteCustomerUseCase: Get.find(),
       ),
+      permanent: true,
     );
   }
 }

@@ -55,33 +55,46 @@ class _CustomerScreenState extends State<CustomerScreen> {
                         width: double.infinity,
                         color: Colors.grey.shade300,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            customerModel.profilePicture == null
-                                ? Container(
-                                    height: 50,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.grey.shade300,
-                                    ),
-                                    child: const Center(
-                                      child: Icon(
-                                        Icons.person,
-                                        color: Colors.grey,
-                                        size: 40,
+                            Row(
+                              children: [
+                                customerModel.profilePicture == null
+                                    ? Container(
+                                        height: 50,
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.grey.shade300,
+                                        ),
+                                        child: const Center(
+                                          child: Icon(
+                                            Icons.person,
+                                            color: Colors.grey,
+                                            size: 40,
+                                          ),
+                                        ),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.circular(5),
+                                        child: Image.network(
+                                          customerModel.profilePicture!,
+                                          fit: BoxFit.fill,
+                                          width: 50,
+                                          height: 50,
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                : ClipRRect(
-                                    borderRadius: BorderRadius.circular(5),
-                                    child: Image.network(
-                                      customerModel.profilePicture!,
-                                      fit: BoxFit.fill,
-                                      width: 100,
-                                      height: 100,
-                                    ),
-                                  ),
-                            Text(customerModel.name),
+                                Text(customerModel.name),
+                              ],
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                customerController
+                                    .deleteCustomer(customerModel.id);
+                              },
+                              icon: const Icon(Icons.delete),
+                            ),
                           ],
                         ),
                       ),

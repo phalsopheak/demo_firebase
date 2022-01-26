@@ -31,3 +31,29 @@ class SaveCustomerUseCase extends UseCaseFuture<String, CustomerModel> {
     return await customerRepository.saveCustomer(parameter);
   }
 }
+
+class UpdateCustomerUseCase extends UseCaseFuture<String, CustomerModel> {
+  final ICustomerRepository customerRepository;
+
+  UpdateCustomerUseCase({
+    required this.customerRepository,
+  });
+
+  @override
+  Future<Either<AppError, String>> call(CustomerModel parameter) async {
+    return await customerRepository.updateCustomer(parameter);
+  }
+}
+
+class DeleteCustomerUseCase extends UseCaseFuture<String, String> {
+  final ICustomerRepository customerRepository;
+
+  DeleteCustomerUseCase({
+    required this.customerRepository,
+  });
+
+  @override
+  Future<Either<AppError, String>> call(String parameter) async {
+    return await customerRepository.deleteCustomer(parameter);
+  }
+}

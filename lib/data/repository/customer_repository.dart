@@ -20,4 +20,14 @@ class CustomerRepository extends ICustomerRepository {
   Future<Either<AppError, String>> saveCustomer(CustomerModel model) {
     return customerDataSource.saveCustomer(model);
   }
+
+  @override
+  Future<Either<AppError, String>> updateCustomer(CustomerModel model) {
+    return customerDataSource.updateCustomer(model);
+  }
+
+  @override
+  Future<Either<AppError, String>> deleteCustomer(String recordId) {
+    return customerDataSource.deleteCustomer(recordId);
+  }
 }

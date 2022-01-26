@@ -7,6 +7,8 @@ import 'package:demo_firebase/domain/util/app_error.dart';
 
 abstract class ICustomerDataSource {
   Future<Either<AppError, String>> saveCustomer(CustomerModel model);
+  Future<Either<AppError, String>> updateCustomer(CustomerModel model);
+  Future<Either<AppError, String>> deleteCustomer(String recordId);
   Future<Either<AppError, List<CustomerModel>>> getListOfCustomer();
 }
 
@@ -40,6 +42,36 @@ class CustomerDataSource extends ICustomerDataSource {
     try {
       await FirestoreCollection.customer.doc(model.id).set(model.toMap());
       return Right(model.id);
+    } catch (e) {
+      return Left(
+        AppError(
+          appErrorType: AppErrorType.connection,
+          description: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppError, String>> updateCustomer(CustomerModel model) async {
+    try {
+      await FirestoreCollection.customer.doc(model.id).set(model.toMap());
+      return Right(model.id);
+    } catch (e) {
+      return Left(
+        AppError(
+          appErrorType: AppErrorType.connection,
+          description: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppError, String>> deleteCustomer(String recordId) async {
+    try {
+      await FirestoreCollection.customer.doc(recordId).delete();
+      return Right(recordId);
     } catch (e) {
       return Left(
         AppError(
