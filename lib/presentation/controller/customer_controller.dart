@@ -24,6 +24,7 @@ class CustomerController extends GetxController {
   }
 
   loadCustomer() async {
+    listCustomer.clear();
     var response = await getListOfCustomerUseCase.call(NoParam());
     response.fold(
       (l) {

@@ -1,4 +1,5 @@
 import 'package:demo_firebase/presentation/screen/customer/customer_screen.dart';
+import 'package:demo_firebase/presentation/screen/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Get.to(() => const CustomerScreen());
+                Get.to(() => const ProductScreen());
               },
               child: const Text('Product Demo'),
             ),
